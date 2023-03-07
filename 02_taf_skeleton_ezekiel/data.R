@@ -1,6 +1,6 @@
 ## Preprocess data, write TAF data tables
 
-## Before: ezekiel.txt (bootstrap/data)
+## Before: ezekiel.txt (boot/data)
 ## After:  ezekiel.csv (data)
 
 library(TAF)
@@ -8,7 +8,7 @@ library(TAF)
 mkdir("data")
 
 ## Read data
-ezekiel <- read.table("bootstrap/data/ezekiel.txt", header=TRUE)
+ezekiel <- read.table("boot/data/ezekiel.txt", header=TRUE)
 
 ## Write TAF table
 write.taf(ezekiel, "data/ezekiel.csv")
