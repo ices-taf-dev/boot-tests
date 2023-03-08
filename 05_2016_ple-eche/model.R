@@ -22,6 +22,7 @@ load("data/input.RData")
 
 ## Run model
 path <- "model"  # required inside assessment() function
-suppressWarnings(results <-
-                   assessment(stock, indices, control, input=FALSE, model=TRUE))
+suppressWarnings(results <- assessment(stock, indices, control, input=FALSE,
+                                       model=TRUE, ignore.stdout=TRUE,
+                                       ignore.stderr=TRUE))
 save(results, file="model/results.RData")
