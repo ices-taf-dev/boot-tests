@@ -16,5 +16,5 @@ cp("bootstrap/data/catageysa.dat", "model")
 
 ## Run model
 setwd("model")
-system("./catageysa")
+system("./catageysa > output.log 2>&1")  # limit on-screen output for test
 setwd("..")
