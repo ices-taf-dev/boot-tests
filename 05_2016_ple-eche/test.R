@@ -1,7 +1,7 @@
 library(TAF)
 library(icesTAF, warn.conflicts=FALSE)
 
-taf.boot()
+TAF::taf.boot()
 print.simple.list(dir(boot.dir(), recursive=TRUE))
 
 source.all()
