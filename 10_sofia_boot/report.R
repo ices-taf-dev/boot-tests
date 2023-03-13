@@ -1,6 +1,6 @@
 ## Prepare plots and tables for report
 
-## Before: sofia20_proportions.csv (bootstrap/data), results.rds (model),
+## Before: sofia20_proportions.csv (boot/data), results.rds (model),
 ##         current_status.csv, stock_timeseries.csv (output)
 ## After:  b_over_bmsy.png, status_count.png, status_proportion.png,
 ##         status_summary.png, stock_cpue.pdf, stock_posterior.pdf,
@@ -20,7 +20,7 @@ levels <- c("Underfished", "Fully fished", "Overfished")
 stocks <- readRDS("model/results.rds")
 stock.timeseries <- read.taf("output/stock_timeseries.csv")
 current_status <- read.taf("output/current_status.csv")
-last_sofia <- read.taf("bootstrap/data/sofia20_proportions.csv")
+last_sofia <- read.taf("boot/data/sofia20_proportions.csv")
 current_status$status <- ordered(current_status$status, levels=levels)
 last_sofia$Category <- ordered(last_sofia$Category, levels=levels)
 

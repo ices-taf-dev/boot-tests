@@ -1,6 +1,6 @@
 ## Preprocess data, write TAF data tables
 
-## Before: catch.csv, effort.csv, priors.csv (bootstrap/data)
+## Before: catch.csv, effort.csv, priors.csv (boot/data)
 ## After:  catch_by_stock.png, catch_effort.csv, catch_relative.png,
 ##         catch_total.png, driors.pdf, input.rds (data)
 
@@ -14,7 +14,7 @@ library(tidyr)    # nest
 mkdir("data")
 
 ## Read catch data, convert to long format
-catch <- read.taf("bootstrap/data/catch.csv")
+catch <- read.taf("boot/data/catch.csv")
 catch$Total <- NULL  # not used, not a stock
 catch <- taf2long(catch, c("year", "stock", "capture"))
 
@@ -55,7 +55,7 @@ catch %>%
 ggsave("data/catch_relative.png", width=12, height=6)
 
 ## Read effort data, combine catch and effort data
-effort <- read.taf("bootstrap/data/effort.csv")
+effort <- read.taf("boot/data/effort.csv")
 effort <- taf2long(effort, c("year", "stock", "effort"))
 catch_effort <- addEffort(catch, effort, same.effort=TRUE)
 
@@ -66,7 +66,7 @@ stocks <- catch_effort %>%
   ungroup()
 
 ## Read priors data, add as driors to stocks object
-priors <- read.taf("bootstrap/data/priors.csv")
+priors <- read.taf("boot/data/priors.csv")
 stocks <- addDriors(stocks, priors, same.priors=TRUE)
 
 ## Plot driors
