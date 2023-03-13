@@ -17,6 +17,7 @@ setwd("model")  # compile inside 'model' folder
 sfs <- safely(fit_sraplus)
 samps <- nrow(stocks)
 a <- Sys.time()
+out <- capture.output(  # quiet test.R
 stocks <- stocks %>%
   ungroup() %>%
   sample_n(samps) %>%
@@ -35,7 +36,7 @@ stocks <- stocks %>%
       estimate_qslope = FALSE,
       estimate_proc_error = TRUE,
       cleanup = TRUE)
-    ))
+    )))
 setwd("..")
 Sys.time() - a
 
