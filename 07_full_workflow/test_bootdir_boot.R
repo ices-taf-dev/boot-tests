@@ -4,18 +4,18 @@ library(TAF)
 taf.skeleton()
 
 # Create data file and data script
-write.table(BOD, "boot/initial/data/bod.dat", row.names=FALSE, quote=FALSE)
+write.table(BOD, file.path(boot.dir(), "initial/data/bod.dat"), row.names=FALSE, quote=FALSE)
 script <- 'write.table(faithful, "faithful.dat", row.names=FALSE, quote=FALSE)'
-write(script, "boot/faithful.R")
+write(script, file.path(boot.dir(), "faithful.R"))
 
 # Create DATA.bib
-draft.data(data.files=dir("boot/initial/data"),
-           data.scripts=dir("boot", pattern="\\.R$"),
-           file="boot/DATA.bib")
+draft.data(data.files=dir(file.path(boot.dir(), "initial/data")),
+           data.scripts=dir(boot.dir(), pattern="\\.R$"),
+           file=file.path(boot.dir(), "DATA.bib"))
 
 # Edit data.R
-script <- 'faith <- read.table("boot/data/faithful/faithful.dat", header=TRUE)
-oxygen <- read.table("boot/data/bod.dat", header=TRUE)\n
+script <- 'faith <- read.table(file.path(boot.dir(), "data/faithful/faithful.dat"), header=TRUE)
+oxygen <- read.table(file.path(boot.dir(), "data/bod.dat"), header=TRUE)\n
 write.taf(faith, dir="data")
 write.taf(oxygen, dir="data")'
 write(script, "data.R", append=TRUE)
@@ -50,7 +50,7 @@ write(script, "report.R", append=TRUE)
 
 # Boot
 taf.boot()
-print.simple.list(dir(boot.dir(), recursive=TRUE))
+print.simple.list(dir(boot.dir(), full=TRUE, recursive=TRUE))
 
 # Run
 source.all()
@@ -58,5 +58,5 @@ print.simple.list(dir("report"))
 
 # Remove everything except test.R
 clean()
-unlink("boot", recursive=TRUE)
+unlink(boot.dir(), recursive=TRUE)
 unlink(c("data.R", "model.R", "output.R", "report.R"))
